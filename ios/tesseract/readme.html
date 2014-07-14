@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1187.34">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #500050; background-color: #ffffff}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #500050; background-color: #ffffff; min-height: 16.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px STSong; color: #500050; background-color: #ffffff}
+    p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #0000ee; background-color: #ffffff}
+    p.p5 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #0000ee; background-color: #ffffff; min-height: 16.0px}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: justify; line-height: 21.0px; font: 12.0px Courier; color: #eeeeee; background-color: #333333}
+    p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: justify; line-height: 21.0px; font: 12.0px Courier; color: #eeeeee; background-color: #333333; min-height: 14.0px}
+    p.p8 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Arial; color: #1155cc; background-color: #ffffff; min-height: 16.0px}
+    span.s1 {font: 14.0px STSong}
+    span.s2 {font: 14.0px Arial}
+    span.s3 {text-decoration: underline}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">针对</span>Leptonica 1.69 <span class="s1">和</span> Tesseract 3.02 <span class="s1">在</span> Mountain Lion<span class="s1">下的</span>Xcode 4.63 (iOS SDK 6.1)<span class="s1">下编译成功。</span></p>
+<p class="p2"><br></p>
+<p class="p3">相关文件下载：</p>
+<p class="p3"><span class="s2">1</span>、编译脚本</p>
+<p class="p4"><span class="s3"><a href="https://dl.dropboxusercontent.com/u/1745859/Blog/tesseract/ios60_tesseract302_leptonica_169/build_dependencies.sh">https://dl.dropboxusercontent.com/u/1745859/Blog/tesseract/ios60_tesseract302_leptonica_169/build_dependencies.sh</a></span></p>
+<p class="p2"><br></p>
+<p class="p1">2<span class="s1">、</span>Leptonica</p>
+<p class="p4"><span class="s3"><a href="http://leptonica.com/download.html">http://leptonica.com/download.html</a></span></p>
+<p class="p4"><span class="s3"><a href="http://leptonica.com/source/leptonica-1.69.tar.gz">http://leptonica.com/source/leptonica-1.69.tar.gz</a></span></p>
+<p class="p2"><br></p>
+<p class="p1">3<span class="s1">、</span>Tesseract</p>
+<p class="p4"><span class="s3"><a href="https://code.google.com/p/tesseract-ocr/downloads/list">https://code.google.com/p/tesseract-ocr/downloads/list</a></span></p>
+<p class="p4"><span class="s3"><a href="https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz">https://tesseract-ocr.googlecode.com/files/tesseract-ocr-3.02.02.tar.gz</a></span></p>
+<p class="p5"><span class="s3"></span><br></p>
+<p class="p5"><span class="s3"></span><br></p>
+<p class="p5"><span class="s3"></span><br></p>
+<p class="p6">// Set up the tessdata path. This is included in the application bundle</p>
+<p class="p6">// but is copied to the Documents directory on the first run.</p>
+<p class="p6">NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);</p>
+<p class="p6">NSString *documentPath = ([documentPaths count] &gt; 0) ? [documentPaths objectAtIndex:0] : nil;</p>
+<p class="p7"><br></p>
+<p class="p6">NSString *dataPath = [documentPath stringByAppendingPathComponent:@"tessdata"];</p>
+<p class="p6">NSFileManager *fileManager = [NSFileManager defaultManager];</p>
+<p class="p6">// If the expected store doesn't exist, copy the default store.</p>
+<p class="p6">if (![fileManager fileExistsAtPath:dataPath]) {</p>
+<p class="p6"><span class="Apple-converted-space">    </span>// get the path to the app bundle (with the tessdata dir)</p>
+<p class="p6"><span class="Apple-converted-space">    </span>NSString *bundlePath = [[NSBundle mainBundle] bundlePath];</p>
+<p class="p6"><span class="Apple-converted-space">    </span>NSString *tessdataPath = [bundlePath stringByAppendingPathComponent:@"tessdata"];</p>
+<p class="p6"><span class="Apple-converted-space">    </span>if (tessdataPath) {</p>
+<p class="p6"><span class="Apple-converted-space">        </span>[fileManager copyItemAtPath:tessdataPath toPath:dataPath error:NULL];</p>
+<p class="p6"><span class="Apple-converted-space">    </span>}</p>
+<p class="p6">}</p>
+<p class="p7"><br></p>
+<p class="p6">setenv("TESSDATA_PREFIX", [[documentPath stringByAppendingString:@"/"] UTF8String], 1);</p>
+<p class="p7"><br></p>
+<p class="p6">// init the tesseract engine.</p>
+<p class="p6">tesseract = new tesseract::TessBaseAPI();</p>
+<p class="p6">tesseract-&gt;Init([dataPath cStringUsingEncoding:NSUTF8StringEncoding], "eng");</p>
+<p class="p8"><br></p>
+</body>
+</html>

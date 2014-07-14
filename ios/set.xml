@@ -1,0 +1,50 @@
+<document xmlns="http://ocrsdk.com/schema/taskDescription-1.0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocrsdk.com/schema/taskDescription-1.0.xsd http://ocrsdk.com/schema/taskDescription-1.0.xsd">
+    
+    <fieldTemplates>
+        <text id="onlyNumber">
+            <language>English</language>
+            <letterSet>0123456789</letterSet>
+            <textType>matrix</textType>
+            <oneTextLine>true</oneTextLine>
+            <oneWordPerTextLine>false</oneWordPerTextLine>
+        </text>
+        <text id="money">
+            <language>English,Digits,ChinesePRC</language>
+            <letterSet>0123456789.￥</letterSet>
+            <textType>matrix</textType>
+            <oneTextLine>true</oneTextLine>
+            <oneWordPerTextLine>true</oneWordPerTextLine>
+        </text>
+        <text id="password">
+            <language>English</language>
+            <letterSet>0123456789+-*/&gt;&lt;</letterSet>
+            <textType>matrix</textType>
+            <oneTextLine>false</oneTextLine>
+            <oneWordPerTextLine>true</oneWordPerTextLine>
+        </text>
+        <text id="date">
+            <language>English,ChinesePRC</language>
+            <letterSet>0123456789年月日</letterSet>
+            <textType>matrix</textType>
+            <oneTextLine>true</oneTextLine>
+            <oneWordPerTextLine>false</oneWordPerTextLine>
+        </text>
+    </fieldTemplates>
+    
+    <page applyTo="0">
+        <text id="fpdm" template="onlyNumber" left="fpdml" top="fpdmt" right="fpdmr" bottom="fpdmb" />
+        <text id="fphm" template="onlyNumber" left="fphml" top="fphmt" right="fphmr" bottom="fphmb" />
+        <text id="ghdw" template="onlyNumber" left="ghdwl" top="ghdwt" right="ghdwr" bottom="ghdwb" />
+          <text id="xhdw" template="onlyNumber" left="xhdwl" top="xhdwt" right="xhdwr" bottom="xhdwb" />
+        <text id="kprq" template="date" left="kprql" top="kprqt" right="kprqr" bottom="kprqb"/>
+        <text id="je" template="money" left="jel" top="jet" right="jer" bottom="jeb" />
+        <text id="se" template="money" left="sel" top="set" right="ser" bottom="seb" />
+        <text id="mmq1" template="password" left="mmq1l" top="mmq1t" right="mmq1r" bottom="mmq1b" />
+        <text id="mmq2" template="password" left="mmq2l" top="mmq2t" right="mmq2r" bottom="mmq2b" />
+        <text id="mmq3" template="password" left="mmq3l" top="mmq3t" right="mmq3r" bottom="mmq3b" />
+        <text id="mmq4" template="password" left="mmq4l" top="mmq4t" right="mmq4r" bottom="mmq4b" />
+    </page>
+    
+</document>

@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/">
+    <file>open.png</file>
+    <file>save.png</file>
+    <file>ocr.png</file>
+    <file>paint.png</file>
+    <file>new2.png</file>
+    <file>save2.png</file>
+    <file>load2.png</file>
+    <file>clear2.png</file>
+    <file>mesure.png</file>
+    <file>chinese.png</file>
+    <file>cube.png</file>
+    <file>scan.png</file>
+  </qresource>
+</RCC>
